@@ -1,11 +1,6 @@
 var gulp = require('gulp');
 var browserSync = require('browser-sync').create();
 
-gulp.task('watch', function (done) {
-  browserSync.reload();
-  done();
-});
-
 gulp.task('default', function () {
 
   browserSync.init({
@@ -15,6 +10,8 @@ gulp.task('default', function () {
     open: false
   });
 
-  gulp.watch(['public/*.js', 'public/*.html'], ['watch']);
+  gulp.watch(['public/app.js', 'public/index.html', 'public/tests/app_spec.js'], {interval: 200}, function () {
+    browserSync.reload();
+  });
 
 });

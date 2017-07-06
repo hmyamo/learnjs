@@ -2,8 +2,15 @@
 
 var learnjs = {};
 
-learnjs.problemView = function () {
-  return $('<div class="problem-view">').text('Coming soon!');
+// learnjs.problemView = function (problemNumber) {
+//   var title = 'Problem #' + problemNumber + ' Coming soon!';
+//   return $('<div class="problem-view">').text(title);
+// }
+
+learnjs.problemView = function (problemNumber) {
+  var view = $('.templates .problem-view').clone();
+  view.find('.title').text('Problem #' + problemNumber + ' Coming soon!');
+  return view;
 }
 
 learnjs.showView = function (hash) {
@@ -16,4 +23,11 @@ learnjs.showView = function (hash) {
     $('.view-container').empty().append(viewFn(hashParts[1]));
   }
 
+};
+
+learnjs.appOnReady = function () {
+  window.onhashchange = function () {
+    learnjs.showView(window.location.hash);
+  }
+  learnjs.showView(window.location.hash);
 };
